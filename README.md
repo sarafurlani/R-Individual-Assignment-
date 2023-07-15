@@ -20,7 +20,7 @@ library(tidyverse)
 library(forecast)
 library(plotly)
 
-# Load sales data
+# Sales Data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
@@ -75,7 +75,7 @@ server <- function(input, output) {
       forecast(h = 13)
   })
   
-  # Create an interactive bar chart comparing current week's actual sales and forecasted sales
+  # Interactive bar chart comparing current week's actual sales and forecasted sales
   output$chart <- renderPlotly({
     data <- data.frame(
       Category = c("Actual Sales", "Forecasted Sales"),
@@ -107,7 +107,7 @@ library(forecast)
 library(scales)
 library(plotly)
 
-# historical records from multiple stores
+# Sales Data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
@@ -161,15 +161,15 @@ server <- function(input, output, session) {
       # Create a time series object
       sales_qrt_ts <- ts(sales_qrt_filtered$Quarterly_Sales, frequency = 1)
       
-      # Build ARIMA model and forecast
+      # ARIMA model and forecast
       arima_model <- auto.arima(sales_qrt_ts, seasonal.test = "seas")
       arima_pred <- forecast(arima_model, h = horizon())
       
-      # Create a data frame for plotting
+      # Data frame for plotting
       plot_data <- data.frame(Quarter = c(sales_qrt_filtered$Quarter, tail(sales_qrt_filtered$Quarter, n = 1) + 1:horizon()),
                               Sales = c(sales_qrt_filtered$Quarterly_Sales, as.numeric(arima_pred$mean)))
       
-      # Plot actual and forecasted values
+      # Plot for actual and forecasted values
       plot <- ggplot(plot_data, aes(x = Quarter, y = Sales, color = "Forecast")) +
         geom_line(size = 0.6) +
         labs(title = "Sales Forecast for Selected Store",
@@ -180,7 +180,7 @@ server <- function(input, output, session) {
         scale_y_continuous(labels = comma, name = "Sales") +
         scale_color_manual(values = c("Forecast" = "navy"))
       
-      # Convert ggplot to plotly
+      # Conversion ggplot to plotly
       ggplotly(plot)
     })
   })
@@ -199,11 +199,11 @@ library(forecast)
 library(tidyverse)
 library(plotly)
 
-# Read the sales data
+# Sales data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
-# Create the Shiny app
+# Shiny app
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
@@ -218,17 +218,17 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-  # Generate the forecasted sales chart
+  # Forecasted sales chart
   output$salesChart <- renderPlotly({
-    # Filter the sales data for the selected store
+    # Filter for selected store
     sales_store <- sales %>% filter(Store == input$store)
     
-    # Perform forecasting for the selected store
+    # Forecasting base
     sales_ts <- ts(sales_store$Weekly_Sales, frequency = 52)
     arima_model <- auto.arima(sales_ts, seasonal.test = "seas")
     forecasted_sales <- forecast(arima_model, h = input$horizon)
     
-    # Create the plotly object
+    # Plotly for the chart
     plot_ly() %>%
       add_lines(x = (max(sales_store$Week) + 1):(max(sales_store$Week) + input$horizon), y = forecasted_sales$mean, name = "Forecasted Sales", type = "scatter", mode = "lines", line = list(color = "navy")) %>%
       layout(
@@ -238,17 +238,16 @@ server <- function(input, output) {
       )
   })
   
-  # Generate the forecasted sales table
+  # Forecasted sales table
   output$salesTable <- renderTable({
-    # Filter the sales data for the selected store
+    # Filter for selected store
     sales_store <- sales %>% filter(Store == input$store)
     
-    # Perform forecasting for the selected store
+    # Forecasting 
     sales_ts <- ts(sales_store$Weekly_Sales, frequency = 52)
     arima_model <- auto.arima(sales_ts, seasonal.test = "seas")
     forecasted_sales <- forecast(arima_model, h = input$horizon)
     
-    # Create a data frame with the forecasted sales
     forecast_table <- data.frame(Week = (max(sales_store$Week) + 1):(max(sales_store$Week) + input$horizon),
                                  Forecasted_Sales = forecasted_sales$mean)
     
@@ -269,11 +268,11 @@ library(forecast)
 library(tidyverse)
 library(plotly)
 
-# Read the sales data
+# Sales data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
-# Create the Shiny app
+# Shiny app
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
@@ -288,17 +287,17 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-  # Generate the forecasted sales chart
+  # Forecasted sales chart
   output$salesChart <- renderPlotly({
-    # Filter the sales data for the selected store
+    # Filter for the selected store
     sales_store <- sales %>% filter(Store == input$store)
     
-    # Perform forecasting for the selected store
+    # Forecasting base
     sales_ts <- ts(sales_store$Weekly_Sales, frequency = 52)
     arima_model <- auto.arima(sales_ts, seasonal.test = "seas")
     forecasted_sales <- forecast(arima_model, h = input$horizon)
     
-    # Create the plotly object
+    # Plotly
     plot_ly() %>%
       add_lines(x = sales_store$Week, y = sales_store$Weekly_Sales, name = "Actual Sales", type = "scatter", mode = "lines", line = list(color = "peachpuff")) %>%
       add_lines(x = (max(sales_store$Week) + 1):(max(sales_store$Week) + input$horizon), y = forecasted_sales$mean, name = "Forecasted Sales", type = "scatter", mode = "lines", line = list(color = "navy")) %>%
@@ -309,17 +308,16 @@ server <- function(input, output) {
       )
   })
   
-  # Generate the forecasted sales table
+  # Forecasted sales table
   output$salesTable <- renderTable({
-    # Filter the sales data for the selected store
+    # Filter for selected store
     sales_store <- sales %>% filter(Store == input$store)
     
-    # Perform forecasting for the selected store
+    # Forecasting
     sales_ts <- ts(sales_store$Weekly_Sales, frequency = 52)
     arima_model <- auto.arima(sales_ts, seasonal.test = "seas")
     forecasted_sales <- forecast(arima_model, h = input$horizon)
     
-    # Create a data frame with the forecasted sales
     forecast_table <- data.frame(Week = (max(sales_store$Week) + 1):(max(sales_store$Week) + input$horizon),
                                  Forecasted_Sales = forecasted_sales$mean)
     
@@ -341,7 +339,7 @@ library(forecast)
 library(scales)
 library(plotly)
 
-# Load sales data
+# Sales data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
@@ -373,13 +371,13 @@ server <- function(input, output, session) {
       arima_model <- auto.arima(sales_ts, seasonal.test = "seas")
       forecast_data <- forecast(arima_model, h = 4)
       
-      # Get the forecasted values, lower and upper bounds of the confidence interval
+      # Confidence interval
       forecast_df <- data.frame(Week = seq_along(forecast_data$mean),
                                 Forecast = forecast_data$mean,
                                 Lower = forecast_data$lower[, "95%"],
                                 Upper = forecast_data$upper[, "95%"])
       
-      # Plot the forecast with or without confidence intervals based on checkbox selection
+      # Plot based on checkbox selection
       if (input$showConfIntervals) {
         plot_ly(forecast_df, x = ~Week) %>%
           add_lines(y = ~Forecast, name = "Forecast", color = I("khaki4")) %>%
@@ -419,7 +417,7 @@ library(tidyverse)
 library(forecast)
 library(lubridate)
 
-# Load sales data
+# Sales data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
@@ -446,7 +444,7 @@ server <- function(input, output) {
     nweek_now <- max(sales$Week)
     horiz <- input$horizon
 
-    # Get the last 52 weeks of sales data
+    # Last 52 weeks of sales data
     last_52_weeks_sales <- sales %>%
       filter(Store == input$storenum, Week > (nweek_now - 52))
 
@@ -469,7 +467,7 @@ server <- function(input, output) {
   theme_minimal() +
   scale_y_continuous(labels = scales::comma)
 
-    # Convert ggplot to plotly object
+    # Convesrion ggplot to plotly
     ggplotly(p)
   })
 }
@@ -487,7 +485,7 @@ library(tidyverse)
 library(forecast)
 library(lubridate)
 
-# Load sales data
+# Sales data
 fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/main/forecasting/sales_weekly.csv"
 sales <- read_csv(fsales)
 
