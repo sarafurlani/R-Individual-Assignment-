@@ -191,7 +191,7 @@ server <- function(input, output, session) {
 shinyApp(ui = ui, server = server)
 ```
 
-# # <span style="font-family: Gill Sans; font-size: 40px;">POINT 3: Sales forecast for a given week (within the next three months) selected in the UI.</span>
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 3: Sales forecast for a given week (within the next three months) selected in the UI.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
