@@ -11,7 +11,7 @@ runtime: shiny
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# POINT 1
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 1: Current week's actual sales vs. forecasted, with current week performance indicators in the UI.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -25,9 +25,7 @@ fsales <- "https://raw.githubusercontent.com/multidis/hult-inter-bus-reports-r/m
 sales <- read_csv(fsales)
 
 # UI
-ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Current week's actual sales vs. forecasted computed at the end of the last week, with current week performance indicator in the UI.")),
+ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       selectInput("storenum", label = "Select Store:",
@@ -88,6 +86,7 @@ server <- function(input, output) {
     plot_ly(data, x = ~Category, y = ~Sales, type = "bar", color = ~Category,
             colors = c("peachpuff", "navy")) %>%
       layout(
+        title = "Current Week's Actual Sales vs. Forecast",
         xaxis = list(title = ""),
         yaxis = list(title = "Sales")
       )
@@ -99,7 +98,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-# POINT 2
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 2: Sales forecast for a specific future quarter (during the upcoming year) selected in the UI.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -114,8 +113,6 @@ sales <- read_csv(fsales)
 
 # UI
 ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Sales forecast for a specific future quarter (during the upcoming year) selected in the UI.")),
   sidebarLayout(
     sidebarPanel(
       selectInput("storenum", label = "Select store:",
@@ -194,7 +191,7 @@ server <- function(input, output, session) {
 shinyApp(ui = ui, server = server)
 ```
 
-# POINT 3
+# # <span style="font-family: Gill Sans; font-size: 40px;">POINT 3: Sales forecast for a given week (within the next three months) selected in the UI.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -208,8 +205,6 @@ sales <- read_csv(fsales)
 
 # Create the Shiny app
 ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Sales forecast for a given week (within the next three months) selected in the UI.")),
   sidebarLayout(
     sidebarPanel(
       sliderInput("horizon", "Forecast Horizon (weeks)", min = 1, max = 12, value = 12),
@@ -266,7 +261,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-# POINT 3.2
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 3.2: Sales forecast for a given week (within the next three months) selected in the UI and comparison with actual sales.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -280,8 +275,6 @@ sales <- read_csv(fsales)
 
 # Create the Shiny app
 ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Sales forecast for a given week (within the next three months) selected in the UI and comparison with actual sales.")),
   sidebarLayout(
     sidebarPanel(
       sliderInput("horizon", "Forecast Horizon (weeks)", min = 1, max = 12, value = 12),
@@ -339,7 +332,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-# POINT 4
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 4: Confidence intervals for the forecasted sales corresponding to the upcoming month.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -354,8 +347,6 @@ sales <- read_csv(fsales)
 
 # UI
 ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Confidence intervals for the forecasted sales corresponding to the upcoming month.")),
   sidebarLayout(
     sidebarPanel(
       selectInput("storenum", label = "Select store:",
@@ -419,7 +410,7 @@ server <- function(input, output, session) {
 shinyApp(ui = ui, server = server)
 ```
 
-# POINT 5
+# <span style="font-family: Gill Sans; font-size: 40px;">POINT 5: Comparison of monthly sales between the past year (actual) and the upcoming year (forecast), by selecting the store and the horizon.</span>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -434,8 +425,6 @@ sales <- read_csv(fsales)
 
 # UI
 ui <- fluidPage(
-  titlePanel(div(style = "font-family: Tahoma; font-size: 30px; color: black;",
-                 "Comparison of monthly sales between the past year (actual) and the upcoming year (forecast), by selecting the store and the horizon.")),
   sidebarLayout(
     sidebarPanel(
       selectInput("storenum", label = "Select store:",
@@ -512,5 +501,4 @@ ui <- fluidPage(
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 shinyApp(ui = ui, server = server)
 ```
-
 
