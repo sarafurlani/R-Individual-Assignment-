@@ -1,5 +1,6 @@
-# R-Individual-Assignment-
-R Individual Assignment 
+# R Individual Assignment:
+The objective of this project is to develop a web application for product demand forecasting.
+By studying historical variations of retail product demand, I provided a user-friendly platform where users can explore and customize the sales forecasts based on their specific needs.
 ---
 title: "Building Interactive Reports with R - Individual Assignment, Sara Furlani"
 output: html_document
