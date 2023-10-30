@@ -3,7 +3,7 @@ The objective of this project is to develop a web application for product demand
 By studying historical variations of retail product demand, I provided a user-friendly platform where users can explore and customize the sales forecasts based on their specific needs.
 ---
 title: "Building Interactive Reports with R - Individual Assignment, Sara Furlani"
-output: html_document
+output: rmarkdown::github_document
 date: "2023-07-11"
 runtime: shiny
 ---
