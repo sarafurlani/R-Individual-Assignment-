@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # [POINT 1: Current week's actual sales vs. forecasted, with current week performance indicators in the UI.]{style="font-family: Gill Sans; font-size: 40px;"}
 
-![Plot 1](Screen Shot 2023-10-29 at 21.14.06.png)
+![Plot 1](plot_1.png)
 
 # [POINT 2: Sales forecast for a specific future quarter (during the upcoming year) selected in the UI.]{style="font-family: Gill Sans; font-size: 40px;"}
 
