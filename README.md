@@ -9,9 +9,8 @@ runtime: shiny
 ---
 
 ```
-#{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE)
-opts_chunk$set(dev=c('png','postscript'))
+{r setup, include=FALSE}
+knitr::opts_chunk$set(dev=c('png','postscript'))
 ```
 
 # <span style="font-family: Gill Sans; font-size: 40px;">POINT 1: Current week's actual sales vs. forecasted, with current week performance indicators in the UI.</span>
