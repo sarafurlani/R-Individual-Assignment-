@@ -3,13 +3,15 @@ The objective of this project is to develop a web application for product demand
 By studying historical variations of retail product demand, I provided a user-friendly platform where users can explore and customize the sales forecasts based on their specific needs.
 ---
 title: "Building Interactive Reports with R - Individual Assignment, Sara Furlani"
-output: github_document
+output: html_document
 date: "2023-07-11"
 runtime: shiny
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```
+#{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(dev=c('png','postscript'))
 ```
 
 # <span style="font-family: Gill Sans; font-size: 40px;">POINT 1: Current week's actual sales vs. forecasted, with current week performance indicators in the UI.</span>
